@@ -1,11 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { RosterService } from './roster.service';
+
+interface RosterEntry {
+  username: string;
+  profileLink: string;
+  articleCount: number;
+  totalFavorites: number;
+  firstArticleDate: string;
+}
 
 @Component({
   selector: 'realworld-roster',
   templateUrl: './roster.component.html',
   styleUrls: [],
-  providers: [],
-  imports: [],
-  standalone: true,
 })
-export class RosterComponent {}
+export class RosterComponent implements OnInit {
+  roster$!: Observable<RosterEntry[]>;
+
+  constructor(private rosterService: RosterService) {}
+
+  ngOnInit() {
+    this.roster$ = this.rosterService.getRoster();
+  }
+}
