@@ -1,1 +1,18 @@
-<p>TODO</p>
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Number of Articles</th>
+      <th>Total Favorites</th>
+      <th>First Article Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let entry of roster$ | async">
+      <td><a [routerLink]="entry.profileLink">{{ entry.username }}</a></td>
+      <td>{{ entry.articleCount }}</td>
+      <td>{{ entry.totalFavorites }}</td>
+      <td>{{ entry.firstArticleDate | date: 'mediumDate' }}</td>
+    </tr>
+  </tbody>
+</table>
